@@ -156,7 +156,7 @@ class SineWaveComparator:
         # ... (Distance and Start Point entries remain the same, with traces) ...
         ttk.Label(self.general_settings_frame, text="Plot Settings", style="Header.TLabel").pack(pady=(0,10), anchor='w')
         ttk.Label(self.general_settings_frame, text="Graph Distance (X-axis):").pack(pady=(5,0), anchor='w')
-        self.distance_var = tk.StringVar(value="0.1") # Shorter default distance
+        self.distance_var = tk.StringVar(value="0.02") # Shorter default distance
         self.distance_var.trace_add("write", self._trigger_plot_update_from_trace)
         self.distance_entry = ScrollableEntry(self.general_settings_frame, variable=self.distance_var, min_val=0.001, max_val=10.0, sensitivity=0.01, width=10, style="TEntry")
         self.distance_entry.pack(fill=tk.X, pady=(0,5))
@@ -203,15 +203,15 @@ class SineWaveComparator:
         zero_crossing_controls_frame = ttk.Frame(controls_bottom_frame)
         zero_crossing_controls_frame.pack(fill=tk.X, pady=(0,5))
 
-        ttk.Label(zero_crossing_controls_frame, text="ZC Amp Tol (% Y):", anchor='w').pack(side=tk.LEFT, padx=(0,2))
-        self.zero_crossing_tolerance_var = tk.StringVar(value="1.0") # Amplitude tolerance for defining a crossing
+        ttk.Label(zero_crossing_controls_frame, text="Y Axis Threashold (% Y):", anchor='w').pack(side=tk.LEFT, padx=(0,2))
+        self.zero_crossing_tolerance_var = tk.StringVar(value="0.01") # Amplitude tolerance for defining a crossing
         self.zero_crossing_tolerance_var.trace_add("write", self._trigger_plot_update_from_trace)
         self.zero_crossing_tolerance_entry = ScrollableEntry(zero_crossing_controls_frame, variable=self.zero_crossing_tolerance_var, min_val=0.01, max_val=20.0, sensitivity=0.05, width=6, style="TEntry")
         self.zero_crossing_tolerance_entry.pack(side=tk.LEFT, padx=(0,10))
 
         # NEW Time Proximity Control
-        ttk.Label(zero_crossing_controls_frame, text="ZC Time Prox. (x0.0001s):", anchor='w').pack(side=tk.LEFT, padx=(0,2))
-        self.zc_time_proximity_var = tk.StringVar(value="10") # Default: 10 * 0.0001s = 1ms
+        ttk.Label(zero_crossing_controls_frame, text="X Axis Threashold (x0.0001s):", anchor='w').pack(side=tk.LEFT, padx=(0,2))
+        self.zc_time_proximity_var = tk.StringVar(value="1") # Default: 10 * 0.0001s = 1ms
         self.zc_time_proximity_var.trace_add("write", self._trigger_plot_update_from_trace)
         self.zc_time_proximity_entry = ScrollableEntry(zero_crossing_controls_frame, variable=self.zc_time_proximity_var, min_val=0, max_val=1000, sensitivity=1, is_int=True, width=6, style="TEntry") # Integer input for simplicity
         self.zc_time_proximity_entry.pack(side=tk.LEFT, padx=(0,5))
